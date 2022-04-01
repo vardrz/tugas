@@ -1,1 +1,79 @@
-<a href="/tugas/web_biodata">Web Biodata</a><br/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farid Fatkhurrozak - 21.240.0006</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <style>
+        body{
+            background-color: teal;
+        }
+
+        .head{
+            text-align: center;
+            font-family: 'Poppins';
+            color:white;
+        }
+
+        ol {
+        counter-reset: li; 
+        list-style: none; 
+        padding: 0;
+        text-shadow: 0 1px 0 rgba(255,255,255,.5);
+        }
+
+        ol a {
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em .8em;
+        margin: .5em 0 .5em 2.5em;
+        background: #D3D4DA;
+        color: #444;
+        text-decoration: none;
+        transition: all .3s ease-out;
+        }
+
+        ol a:hover {background: #DCDDE1;}       
+        ol a:before {
+        content: counter(li);
+        counter-increment: li;
+        position: absolute;
+        left: -2.5em;
+        top: 50%;
+        margin-top: -1em;
+        background: #f9dd94;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        text-align: center;
+        font-weight: bold;
+        }
+
+        ol a:after {
+        position: absolute;
+        content: "";
+        border: .5em solid transparent;
+        left: -1em;
+        top: 50%;
+        margin-top: -.5em;
+        transition: all .3s ease-out;
+        }
+
+        ol a:hover:after {
+        left: -.5em;
+        border-left-color: #f9dd94;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="head">TUGAS KULIAH</h1>
+    <h3 class="head">Farid Fatkhurrozak - 21.240.0006</h3>
+    <h3 class="head" style="margin-top: -20px;">TEKNIK INFORMATIKA / <span id="date"></span></h3>
+    <ol>
+        <li><a href="/web_biodata/">Pemp Web I - Biodata</a></li>
+    </ol>
+</body>
+<script>document.getElementById('date').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+</html>
