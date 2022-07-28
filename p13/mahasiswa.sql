@@ -44,8 +44,7 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `tptlhr`, `tgllhr`, `alamat`, `kelas`, `prodi`, `nohp`, `foto`) VALUES
-('21.240.0006', 'Farid Fatkhurrozak', 'Pekalongan', '2002-09-19', 'Pekuncen', '2P43', 'Teknik Informatika', '08150021000', 'foto/21.240.0006.png'),
-('21.240.0029', 'Kai Havertz', 'Munich', '1995-09-29', 'Munich', '2P43', 'Teknik Informatika', '08150021029', 'foto/21.240.0029.png');
+('21.240.0006', 'Farid Fatkhurrozak', 'Pekalongan', '2002-01-01', 'Isekai', '2P43', 'Teknik Informatika', '08150021000', 'foto/21.240.0006.png');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
