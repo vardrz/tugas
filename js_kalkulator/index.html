@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<style>
+    table{
+        border-collapse: collapse;
+        margin-top: 10%;
+    }
+    table tr td{
+        width: 100px;
+        height: 70px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: x-large;
+        border: 2px solid black;
+        background-color: aquamarine;
+        text-align: center;
+    }
+    .h{
+        background-color: aqua;
+    }
+    .h2{
+        background-color: #37e4e4;
+    }
+    button{
+        width: 100px;
+        height: 70px;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: x-large;
+        background: none;
+        border: none;
+    }
+</style>
+<body>
+    
+    <center>
+        <table width="300px" border="1px">
+            <tr>
+                <td class="h2"><button onclick="hapus()">Clear</button></td>
+                <td class="h2"><button onclick="backspace()">⌫</button></td>
+                <td colspan="2" class="h2"><button onclick="hasil()" style="width: 100%;">=</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="angka('1')">1</button></td>
+                <td><button onclick="angka('2')">2</button></td>
+                <td><button onclick="angka('3')">3</button></td>
+                <td class="h"><button onclick="operasi('tambah')">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="angka('4')">4</button></td>
+                <td><button onclick="angka('5')">5</button></td>
+                <td><button onclick="angka('6')">6</button></td>
+                <td class="h"><button onclick="operasi('kurang')">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="angka('7')">7</button></td>
+                <td><button onclick="angka('8')">8</button></td>
+                <td><button onclick="angka('9')">9</button></td>
+                <td class="h"><button onclick="operasi('kali')">×</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="angka('0')">0</button></td>
+                <td><button onclick="angka('00')">00</button></td>
+                <td><button onclick="angka('.')">,</button></td>
+                <td class="h"><button onclick="operasi('bagi')">÷</button></td>
+            </tr>
+            <tr>
+                <td id="hasil" colspan="4" class="h2">
+                </td>
+            </tr>
+        </table>
+    </center>
+
+
+    <script>
+        // init variable
+        var angka1 = '', angka2 = '', op = '';
+        var isiAngka1 = true; // true = belum pilih operasi matematika
+        var angkaNew = false;
+
+        // tap tombol angka
+        function angka(id){
+            if(angkaNew){   // jika sudah klik = maka hapus isi dari element dgn id hasil
+                document.getElementById("hasil").innerHTML = '';
+                angkaNew = false;
+            }
+
+            document.getElementById("hasil").innerHTML += id;
+
+            // jika sudah klik operasi matematika, angka akan dimasukan ke var angka2
+            if(isiAngka1){
+                angka1 += id;
+            } else {
+                angka2 += id;
+            }
+        }
+
+        // tap operasi hitung + - x :
+        function operasi(operasi){
+            isiAngka1 = false;  // mengunci value var angka1
+
+            switch(operasi){    //menetapkan var op (operasi)
+                case 'tambah':
+                    document.getElementById("hasil").innerHTML += '+';
+                    op = 'tambah';
+                    break;
+                case 'kurang':
+                    document.getElementById("hasil").innerHTML += '-';
+                    op = 'kurang';
+                    break;
+                case 'kali':
+                    document.getElementById("hasil").innerHTML += '×';
+                    op = 'kali';
+                    break;
+                case 'bagi':
+                    document.getElementById("hasil").innerHTML += '÷';
+                    op = 'bagi';
+                    break;
+            }
+        }
+
+        // tap tombol C (clear)
+        function hapus(){
+            // reset semua var angka
+            document.getElementById("hasil").innerHTML = '';
+            angka1 = ''; 
+            angka2 = ''; 
+        }
+
+        // tap tombol backspace
+        function backspace(){
+            // tangkap isi dari elemen dgn id hasil
+            text = document.getElementById("hasil").innerHTML.slice(0, -1); // hapus 1 karakter paling belakang dgn perintah slice
+            document.getElementById("hasil").innerHTML = text; // isi kembali elemen
+
+            // hapus last char dari var angka
+            if(isiAngka1){
+                angka1 = angka1.slice(0, -1);
+            } else {
+                angka2 = angka2.slice(0, -1);
+            }
+        }
+
+        // tap tombol =
+        function hasil(){
+            var hasil;
+            switch(op){
+                case 'tambah':
+                    // parse dari String ke Float untuk memudahkan saat menghitung bilangan desimal
+                    // .toPrecision : menampilkan angka dengan 15 digit, meningkatkan akurasi hitung
+                    hasil = (parseFloat(angka1) + parseFloat(angka2)).toPrecision(15);
+                    break;
+                case 'kurang':
+                    hasil = (parseFloat(angka1) - parseFloat(angka2)).toPrecision(15);
+                    break;
+                case 'kali':
+                    hasil = (parseFloat(angka1) * parseFloat(angka2)).toPrecision(15);
+                    break;
+                case 'bagi':
+                    hasil = (parseFloat(angka1) / parseFloat(angka2)).toPrecision(15);
+                    break;
+            }
+            console.log(hasil);
+
+            // format var hasil sesuai angka misal 10000 menjadi 10.000
+            document.getElementById("hasil").innerHTML += ' = <b>' + new Intl.NumberFormat(['ban', 'id']).format(hasil) + '</b>';
+
+            // reset semua variable
+            isiAngka1 = true;
+            angkaNew = true; // true : hapus isi elemen dgn id hasil
+            angka1 = '';
+            angka2 = '';
+        }
+    </script>
+
+</body>
+</html>
